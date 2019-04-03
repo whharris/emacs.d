@@ -60,6 +60,14 @@
       '((t . ivy--regex-fuzzy)))
 
 ;; Keybindings
+(defun my/load-init-file ()
+  (interactive)
+  (load user-init-file))
+
+(defun my/edit-init-file ()
+  (interactive)
+  (find-file user-init-file))
+
 (which-key-mode)
 (require 'general)
 (general-define-key
@@ -69,6 +77,7 @@
  ;; bind to simple key press
   "/"   'counsel-projectile-ag
   "SPC"	'counsel-M-x
+  "TAB"	'switch-to-prev-buffer
   ;; Buffers
   "b"   '(:ignore t :which-key "buffers")
   "bb"  '(ivy-switch-buffer :which-key "switch buffer")
@@ -78,8 +87,13 @@
   "ff"  '(counsel-find-file :which-key "find file")
   "fr"  '(counsel-recentf :which-key "recent files")
   "fs"  '(save-buffer :which-key "save buffer")
+  ;; Emacs config
+  "fe"  '(:ignore t :which-key "emacs config")
+  "fed" '(my/edit-init-file :which-key "edit emacs config")
+  "feR" '(my/load-init-file :which-key "reload emacs config")
   ;; Projects
   "p"   '(:ignore t :which-key "project")
+  "pa"  '(projectile-add-known-project :which-key "add project")
   "pf"  '(counsel-projectile-find-file :which-key "find file in project")
   "pp"  '(counsel-projectile-switch-project :which-key "switch project")
   ;; Windows
@@ -87,6 +101,10 @@
   "w/"  '(split-window-right :which-key "split window vertically")
   "w-"  '(split-window-below :which-key "split window horizontally")
   "wd"  '(delete-window :which-key "delete window")
+  "wh"  '(windmove-left :which-key "window left")
+  "wj"  '(windmove-down :which-key "window below")
+  "wk"  '(windmove-up :which-key "window above")
+  "wl"  '(windmove-right :which-key "windo right")
   ;; Frames
   "F"   '(:ignore t :which-key "frames")
   "FN"  '(make-frame-command :which-key "new frame")
