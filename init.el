@@ -21,7 +21,9 @@
    '(
      counsel
      counsel-projectile
+     elpy
      evil
+     exec-path-from-shell
      general
      ivy
      projectile
@@ -35,6 +37,10 @@
    (package-refresh-contents)
    (my/install-packages)))
 
+;; Initialize environment from shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (setq visible-bell nil
       ring-bell-function 'flash-mode-line)
 (defun flash-mode-line ()
@@ -45,6 +51,9 @@
 (set-face-attribute 'default nil :height 150)
 
 (load-theme 'spacemacs-dark t)
+
+(setq inhibit-startup-message t)
+(global-linum-mode t)
 
 (require 'better-defaults)
 
@@ -113,6 +122,8 @@
   "tF"  '(toggle-frame-fullscreen :which-key "toggle fullscreen")
   )
 
+(elpy-enable)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -123,7 +134,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (counsel-projectile counsel ivy helm-projectile helm projectile spacemacs-theme evil))))
+    (exec-path-from-shell exec-path-from-shell-initialize elpy counsel-projectile counsel ivy helm-projectile helm projectile spacemacs-theme evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
